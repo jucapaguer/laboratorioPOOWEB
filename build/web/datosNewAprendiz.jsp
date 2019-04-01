@@ -6,7 +6,7 @@
 
 <%@page import="com.adsi.control.Controlador"%>
 <%@page import="com.adsi.modelo.Aprendiz"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 

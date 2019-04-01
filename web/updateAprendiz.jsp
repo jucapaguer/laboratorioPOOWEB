@@ -6,13 +6,13 @@
 
 <%@page import="com.adsi.modelo.Aprendiz"%>
 <%@page import="com.adsi.control.Controlador"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 
     <head>
 
-        <meta charset="utf-8">
+        <meta charset="ISO-8859-1">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">

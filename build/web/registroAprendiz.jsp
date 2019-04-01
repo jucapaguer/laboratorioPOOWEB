@@ -4,9 +4,11 @@
     Author     : SENA2
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="com.adsi.modelo.Curso"%>
 <%@page import="com.adsi.modelo.Aprendiz"%>
 <%@page import="com.adsi.control.Controlador"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,7 +74,7 @@
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            
+
                             <!-- Enlaces de referencia a las paginas donde estan las tablas con la informacion-->
                             <a class="collapse-item" href="tabla.jsp">Aprendiz</a>
                             <a class="collapse-item" href="tablacursos.jsp">Cursos</a>
@@ -89,7 +91,7 @@
                     </a>
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            
+
                             <!-- Enlaces de referencia a las paginas de registro-->
                             <a class="collapse-item" href="registroAprendiz.jsp">Aprendiz</a>
                             <a class="collapse-item" href="registroCurso.jsp">Cursos</a>
@@ -112,7 +114,13 @@
             <!-- End of Sidebar -->
 
         </ul>
+        <!--Este codigo nos permite utilizar la conexion que fue almacenada dentro de la sesion,
+                proceso que fue realizado anteriormente en la pagina index.jsp-->
+        <%
 
+            Controlador repo = (Controlador) session.getAttribute("repo");
+
+        %>
 
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -127,7 +135,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">NUEVO APRENDIZ</h6>
                     </div>
                     <div class="card-body">
-                        
+
                         <!-- El action utilizado en el form nos permite enviar los datos contenidos en los inputs a 
                             otra pagina -->
                         <form action="datosNewAprendiz.jsp" method="POST">
@@ -161,15 +169,25 @@
                                         <option value="F">Femenino</option>                                        
                                     </select>
                                 </div>
-                                
+
                                 <div class="form-group col-md-4">
-                                        <label >Curso </label>
-                                        <input type="text" class="form-control" name="fk_curso" placeholder="Curso...">
-                                    </div>
+                                    <label >Curso </label>
+                                    <select class="form-control" name="fk_curso" required="true">
+                                        <%                                            List<Curso> lista2 = repo.findAllCursos();
+                                            for (Curso item2 : lista2) {
+                                        %>
+                                        <option value="<%=item2.getId_cursos()%>">
+                                            <%= item2.getNombre_curso()%> 
+                                        </option>
+                                        <%
+                                            }
+                                        %>
+                                    </select>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Registrar</button>
                         </form>
-                        
+
                     </div>
                 </div>
 

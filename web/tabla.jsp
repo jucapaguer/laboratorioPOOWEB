@@ -7,12 +7,13 @@
 <%@page import="java.util.List"%>
 <%@page import="com.adsi.modelo.Aprendiz"%>
 <%@page import="com.adsi.control.Controlador"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 
     <head>
 
-        <meta charset="utf-8">
+        <meta charset="ISO-8859-1">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
@@ -185,7 +186,7 @@
                                         <!--Enlace de referencia hacia la tabla updateAprendiz,
                                         Ademas se utiliza para hacer la transferencia de datos de esta pagina a la otra-->
                                         <a href="updateAprendiz.jsp?ID=<%=item.getId_aprendices()%>&Documento=<%=item.getDocumento()%>&Nombre=<%=item.getNombres()%>&Apellido=<%=item.getApellidos()%>
-                                           &Edad=<%=item.getEdad()%>&Genero=<%=item.getSexo()%>&Fkcurso=<%=item.getFk_curso()%>" class="btn btn-info btn-circle btn-sm" data-toggle="modal" data-target="#editar">
+                                           &Edad=<%=item.getEdad()%>&Genero=<%=item.getSexo()%>&Fkcurso=<%=item.getFk_curso()%>" class="btn btn-info btn-circle btn-sm" >
                                             <i class="fas fa-edit "></i>
                                         </a>
 

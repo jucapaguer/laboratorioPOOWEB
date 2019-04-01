@@ -6,7 +6,7 @@
 
 <%@page import="com.adsi.modelo.Curso"%>
 <%@page import="com.adsi.control.Controlador"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -168,7 +168,7 @@
                                 <label >JORNADA</label>
                                 <select class="form-control" name="Jornada2" required="true" >
                                     <option ><%=jornada%></option>
-                                    <option value="M">MaÃ±ana</option>
+                                    <option value="M">Mañana</option>
                                     <option value="T">Tarde</option>
                                     <option value="N">Noche</option> 
                                     <option value="MA">Madrugada</option> 

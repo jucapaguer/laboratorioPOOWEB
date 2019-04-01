@@ -9,6 +9,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.util.List"%>
 <%@page import="com.adsi.control.Controlador"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 
