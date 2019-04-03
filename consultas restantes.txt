@@ -1,0 +1,3 @@
+
+
+SELECT fk_curso, count(*) FROM aprendices where fk_curso = 2 ; -- conteo por curso

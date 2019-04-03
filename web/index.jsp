@@ -7,7 +7,7 @@
 <%@page import="com.adsi.control.Controlador"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
     <head>
 
@@ -133,6 +133,7 @@
         </div>
         <br>
         <br>
+        
         <div class="row">
 
             <div class="col-xl-4 col-lg-5">

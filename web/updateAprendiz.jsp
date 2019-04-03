@@ -4,11 +4,13 @@
     Author     : SENA2
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="com.adsi.modelo.Curso"%>
 <%@page import="com.adsi.modelo.Aprendiz"%>
 <%@page import="com.adsi.control.Controlador"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
     <head>
 
@@ -72,7 +74,7 @@
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            
+
                             <!-- Enlaces de referencia a las paginas donde estan las tablas con la informacion-->
                             <a class="collapse-item" href="tabla.jsp">Aprendiz</a>
                             <a class="collapse-item" href="tablacursos.jsp">Cursos</a>
@@ -89,7 +91,7 @@
                     </a>
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            
+
                             <!-- Enlaces de referencia a las paginas de registro-->
                             <a class="collapse-item" href="registroAprendiz.jsp">Aprendiz</a>
                             <a class="collapse-item" href="registroCurso.jsp">Cursos</a>
@@ -124,6 +126,7 @@
             String edad;
             String sexo;
             String fk_curso;
+            int idCurso;
 
             id = request.getParameter("ID");
             documento = request.getParameter("Documento");
@@ -132,7 +135,7 @@
             sexo = request.getParameter("Genero");
             edad = request.getParameter("Edad");
             fk_curso = request.getParameter("Fkcurso");
-
+            idCurso = Integer.parseInt(fk_curso);
 
         %>
 
@@ -151,7 +154,7 @@
                     <div class="card-body">
                         <form action="">
                             <div class="form-row">
-                                 
+
                                 <!--Cada variable que fue declarada en el anterior segemento es ubicada dentro
                                     de los inputs correspondientes para la muestra y luego manipulacion de la
                                     informacion-->
@@ -184,7 +187,7 @@
                                 <div class="form-group col-md-4">
                                     <label >SEXO</label>
                                     <select class="form-control" name="Sexo2" required="true">
-                                        <option ><%=sexo%></option>
+                                        <option ><%=sexo%> (Actual)</option>
                                         <option value="M">Masculino</option>
                                         <option value="F">Femenino</option>                                        
                                     </select>
@@ -192,12 +195,35 @@
 
                                 <div class="form-group col-md-4">
                                     <label >CURSO</label>
-                                    <input type="text" class="form-control" name="fk_curso2" value="<%=fk_curso%>" >
+                                    <select class="form-control" name="fk_curso2" required="true">
+                                        <%
+                                            List<Curso> lista3 = repo.findCursoByIdCurso(idCurso);
+
+                                            for (Curso item3 : lista3) {
+                                        %>
+                                        <option value="<%=item3.getId_cursos()%>">
+                                            <%=item3.getNombre_curso()%> (Actual)
+                                        </option>
+                                        <% }
+                                        %>
+
+
+                                        <%
+                                            List<Curso> lista2 = repo.findAllCursos();
+                                            for (Curso item2 : lista2) {
+                                        %>
+                                        <option value="<%=item2.getId_cursos()%>">
+                                            <%= item2.getNombre_curso()%> 
+                                        </option>
+                                        <%
+                                            }
+                                        %>
+                                    </select>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary" name="btnActualizar">Actualizar</button>
                         </form>
-                                
+
                         <!--Dentro de este segmento es donde son almacenados los datos que fueron manipulados 
                         anteriormente en los inputs, luego son enviados atraves de los SETs a un metodo que ya
                         fue declarado en la clase controlador.

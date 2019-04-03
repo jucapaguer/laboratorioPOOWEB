@@ -11,7 +11,7 @@
 <%@page import="com.adsi.control.Controlador"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
     <head>
 
@@ -169,7 +169,7 @@
                                         <!--Enlace de referencia hacia la tabla updateMateria,
                                         Ademas se utiliza para hacer la transferencia de datos de esta pagina a la otra-->
                                         <a href="updateMateria.jsp?ID=<%=item.getId_materias()%>&NombreMateria=<%=item.getNombre_materia()%>&Intensidad=<%=item.getIntensidad()%>" class="btn btn-info btn-circle btn-sm">
-                                            <i class="fas fa-info-circle"></i> 
+                                            <i class="fas fa-edit"></i> 
                                         </a>
 
                                         <!--En este enlace solo se hace la tranferencia del codigo de la Materia 

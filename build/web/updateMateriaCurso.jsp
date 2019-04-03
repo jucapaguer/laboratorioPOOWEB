@@ -4,10 +4,14 @@
     Author     : SENA2
 --%>
 
+<%@page import="com.adsi.modelo.Materia"%>
+<%@page import="java.util.List"%>
+<%@page import="com.adsi.modelo.Curso"%>
+<%@page import="com.adsi.modelo.Curso"%>
 <%@page import="com.adsi.control.Controlador"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
     <head>
 
@@ -71,7 +75,7 @@
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            
+
                             <!-- Enlaces de referencia a las paginas donde estan las tablas con la informacion-->
                             <a class="collapse-item" href="tabla.jsp">Aprendiz</a>
                             <a class="collapse-item" href="tablacursos.jsp">Cursos</a>
@@ -89,7 +93,7 @@
                     </a>
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            
+
                             <!-- Enlaces de referencia a las paginas de registro-->
                             <a class="collapse-item" href="registroAprendiz.jsp">Aprendiz</a>
                             <a class="collapse-item" href="registroCurso.jsp">Cursos</a>
@@ -115,12 +119,20 @@
         </ul>
 
     </nav>
-<!--
+    <!--El codigo de nombre "repo" nos permite para utilizar la conexion que fue almacenada dentro de la sesion,
+    proceso que fue realizado anteriormente en la pagina index.jsp-->
+    <!--Dentro de este segmento es donde son almacenas los datos que fueron tranferidos de la pagina tablaMateriaCurso-->
+    <%
+        Controlador repo = (Controlador) session.getAttribute("repo");
+        String IdMateriaCurso;
+        int IdMateria;
+        int IdCurso;
 
-CODIGO PENDIENTE .......
+        IdMateriaCurso = request.getParameter("ID");
+        IdMateria = Integer.parseInt(request.getParameter("Materia"));
+        IdCurso = Integer.parseInt(request.getParameter("Curso"));
 
-
--->
+    %>
 
     <div id="content-wrapper" class="d-flex flex-column">
 
@@ -135,25 +147,71 @@ CODIGO PENDIENTE .......
                     <h6 class="m-0 font-weight-bold text-primary">MATERIA x CURSO</h6>
                 </div>
                 <div class="card-body">
-                    
+
                     <form action="">
                         <div class="form-row">
 
-                             <div class="form-group col-md-4">
-                                <label >ID</label>
-                                <input type="Text" class="form-control" name="Id" value="" readonly="readonly">
-                            </div>
-                            
                             <div class="form-group col-md-4">
-                                <label >NOMBRE</label>
-                                <input type="Text" class="form-control" name="Nombre" >
+                                <label >ID</label>
+                                <input type="Text" class="form-control" name="Id" value="<%=IdMateriaCurso%>" readonly="readonly">
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label >INTENSIDAD</label>
-                                <input type="number" class="form-control" name="Intensidad" >
+                                <label >MATERIA</label>
+                                <select class="form-control" name="fk_materia" required="true">
+                                        <%
+                                            List<Materia> lista = repo.findMateriaByIdMateria(IdMateria);
+
+                                            for (Materia item : lista) {
+                                        %>
+                                        <option value="<%=item.getId_materias() %>">
+                                            <%=item.getNombre_materia() %> (Actual)
+                                        </option>
+                                        <% }
+                                        %>
+
+
+                                        <%
+                                            List<Materia> lista2 = repo.findAllMateria();
+                                            for (Materia item2 : lista2) {
+                                        %>
+                                        <option value="<%=item2.getId_materias() %>">
+                                            <%= item2.getNombre_materia() %> 
+                                        </option>
+                                        <%
+                                            }
+                                        %>
+                                    </select>
                             </div>
-                            
+
+                            <div class="form-group col-md-4">
+                                <label >CURSO</label>
+                                <select class="form-control" name="fk_curso" required="true">
+                                        <%
+                                            List<Curso> lista3 = repo.findCursoByIdCurso(IdCurso);
+
+                                            for (Curso item3 : lista3) {
+                                        %>
+                                        <option value="<%=item3.getId_cursos()%>">
+                                            <%=item3.getNombre_curso()%> (Actual)
+                                        </option>
+                                        <% }
+                                        %>
+
+
+                                        <%
+                                            List<Curso> lista4 = repo.findAllCursos();
+                                            for (Curso item4 : lista4) {
+                                        %>
+                                        <option value="<%=item4.getId_cursos()%>">
+                                            <%= item4.getNombre_curso()%> 
+                                        </option>
+                                        <%
+                                            }
+                                        %>
+                                    </select>
+                            </div>
+
                         </div>
                         <button type="submit" class="btn btn-primary">Actualizar</button>
                     </form>

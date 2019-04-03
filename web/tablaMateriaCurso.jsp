@@ -11,7 +11,7 @@
 <%@page import="com.adsi.control.Controlador"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
     <head>
 
@@ -196,8 +196,8 @@
                                         CODIGO PENDIENTE...
                                         
                                         -->
-                                        <a href="updateMateriaCurso.jsp" class="btn btn-info btn-circle btn-sm">
-                                            <i class="fas fa-info-circle"></i>
+                                        <a href="updateMateriaCurso.jsp?ID=<%=item.getId_materias_curso()%>&Curso=<%=item.getFk_curso()%>&Materia=<%=item.getFk_materia()%>" class="btn btn-info btn-circle btn-sm">
+                                            <i class="fas fa-edit"></i>
                                         </a>
 
                                         <!--En este enlace solo se hace la tranferencia del codigo dela MateriaCurso 

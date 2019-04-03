@@ -11,7 +11,7 @@
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
     <head>
 
@@ -146,11 +146,7 @@
                             <!--En este caso los ciclos for son utilizados para crear las opciones del select
                                 con cada uno de los registros que se encuentren en las tablas , aun que solo es utilizado
                                 el nombre de cada uno de ellos-->
-                            <!--
                             
-                            PENDIENTE CODIGO PARA VALUES......
-                            
-                            -->
                             <div class="form-group col-md-4">
                                 <label >Materias</label>
                                 <select class="form-control" name="IdMateria" required="true">

@@ -9,7 +9,7 @@
 <%@page import="com.adsi.control.Controlador"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
     <head>
 
@@ -167,7 +167,7 @@
                                         <!--Enlace de referencia hacia la tabla updateCurso,
                                         Ademas se utiliza para hacer la transferencia de datos de esta pagina a la otra-->
                                         <a href="updateCurso.jsp?ID=<%=item.getId_cursos()%>&NombreCurso=<%=item.getNombre_curso()%>&Jornada=<%=item.getJornada()%>" class="btn btn-info btn-circle btn-sm">
-                                            <i class="fas fa-info-circle"></i>
+                                            <i class="fas fa-edit"></i>
                                         </a>
 
                                             <!--En este enlace solo se hace la tranferencia del codigo del Curso 

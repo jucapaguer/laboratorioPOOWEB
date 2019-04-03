@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 
 public class Controlador extends Conexion {
 
+    //Comienzo CRUD basico de las tablas Aprendiz,Curso,Materia y MateriaCurso
     public LinkedList findAllAprendices() throws SQLException {
         if (!hayConexion()) {
             throw new SQLException(" No existe conexion abierta ");
@@ -239,8 +240,8 @@ public class Controlador extends Conexion {
             }
         }
     }
-
-    public void eliminarAprendiz(Aprendiz aprendiz) throws SQLException {
+    
+    public void adicionarMateriaCurso(MateriaCurso materiaCurso) throws SQLException {
         if (!hayConexion()) {
             throw new SQLException(" No existe conexion abierta ");
         }
@@ -248,6 +249,34 @@ public class Controlador extends Conexion {
         PreparedStatement pst = null;
         ResultSet rst = null;
 
+        try {
+            pst = con.prepareStatement("INSERT INTO `materias_curso` "
+                    + "(`fk_curso`, `fk_materia`) "
+                    + "VALUES (?, ?)" );    //Definir la consulta
+            pst.setInt(1, materiaCurso.getFk_curso());
+            pst.setInt(2, materiaCurso.getFk_materia());
+
+            pst.execute();                              //Ejecutarla 
+
+        } catch (Exception Ex) {
+            System.out.println("Error en Adicionar Dato : \n" + Ex);
+        } finally {
+            if (pst != null) {
+                pst.close();
+            }
+            if (rst != null) {
+                rst.close();
+            }
+        }
+    }
+
+    public void eliminarAprendiz(Aprendiz aprendiz) throws SQLException {
+        if (!hayConexion()) {
+            throw new SQLException(" No existe conexion abierta ");
+        }
+
+        PreparedStatement pst = null;
+        
         try {
             pst = con.prepareStatement("DELETE FROM `aprendices` "
                     + "WHERE (`id_aprendices` = ?);");    //Definir la consulta
@@ -261,9 +290,7 @@ public class Controlador extends Conexion {
             if (pst != null) {
                 pst.close();
             }
-            if (rst != null) {
-                rst.close();
-            }
+            
         }
     }
 
@@ -469,7 +496,9 @@ public class Controlador extends Conexion {
            
         }
     }
+    //Fin CRUD basico
 
+    //Metodos de ayuda
     public LinkedList findAprendicesCurso(int p_curso) throws SQLException {
         if (!hayConexion()) {
             throw new SQLException(" No existe conexion abierta ");
@@ -639,6 +668,36 @@ public class Controlador extends Conexion {
             }
         }
         return lista;                            //Retorna la lista llena
+    }
+    
+    //Metodos de Conteos
+    public int contarAprendicesByEdadCurso(Aprendiz aprendiz)throws SQLException {
+        if (!hayConexion()) {
+            throw new SQLException(" No existe conexion abierta ");
+        }
+
+        PreparedStatement pst = null;
+        try {
+            String query;
+            query = "SELECT edad,count(*) `aprendices` where `edad`=? and `fk_curso`=?";    //Definir la consulta
+            pst = con.prepareStatement(query);                      //Prepararla
+            pst.setString(1, aprendiz.getEdad());
+            pst.setInt(2, aprendiz.getFk_curso());
+
+            pst.execute();                               //Ejecutarla 
+
+            System.out.println("El Query " + query);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }finally {
+            if (pst != null) {
+                pst.close();
+                pst = null;
+            }
+          
+        }
+        return Aprendiz;
     }
 
 }

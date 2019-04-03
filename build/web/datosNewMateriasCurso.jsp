@@ -4,11 +4,14 @@
     Author     : JUANK
 --%>
 
+<%@page import="com.adsi.modelo.MateriaCurso"%>
+<%@page import="com.adsi.modelo.Curso"%>
+<%@page import="java.util.List"%>
 <%@page import="com.adsi.modelo.Materia"%>
 <%@page import="com.adsi.control.Controlador"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
     <head>
 
@@ -72,7 +75,7 @@
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            
+
                             <!-- Enlaces de referencia a las paginas donde estan las tablas con la informacion-->
                             <a class="collapse-item" href="tabla.jsp">Aprendiz</a>
                             <a class="collapse-item" href="tablacursos.jsp">Cursos</a>
@@ -89,7 +92,7 @@
                     </a>
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            
+
                             <!-- Enlaces de referencia a las paginas de registro-->
                             <a class="collapse-item" href="registroAprendiz.jsp">Aprendiz</a>
                             <a class="collapse-item" href="registroCurso.jsp">Cursos</a>
@@ -116,24 +119,29 @@
 
     </nav>
 
-     <!--Dentro de este segmento es donde son almacenados los datos que fueron enviados
-        anteriormente de la pagina registroMateriaCurso, luego son enviados atraves de los SETs a un metodo que ya
-        fue declarado en la clase controlador.
-        
+    <!--Dentro de este segmento es donde son almacenados los datos que fueron enviados
+       anteriormente de la pagina registroMateriaCurso, luego son enviados atraves de los SETs a un metodo que ya
+       fue declarado en la clase controlador.
+       
     -->
     <%
         Controlador repo = (Controlador) session.getAttribute("repo");
 
-        String NOMmateria;
-        String NOMcurso;
+        int NOMmateria;
+        int NOMcurso;
 
-        NOMmateria = request.getParameter("IdMateria");
-        NOMcurso = request.getParameter("IdCurso");
+        NOMmateria = Integer.parseInt(request.getParameter("IdMateria"));
+        NOMcurso = Integer.parseInt(request.getParameter("IdCurso"));
 
+        MateriaCurso nuevaMateriaCurso = new MateriaCurso();
 
+        nuevaMateriaCurso.setFk_materia(NOMmateria);
+        nuevaMateriaCurso.setFk_curso(NOMcurso);
+        
+        repo.adicionarMateriaCurso(nuevaMateriaCurso);
     %>
 
-    
+
     <!--Dentro de la tabla solo se muestran los datos o el registro que fue agregado-->
     <div id="content-wrapper" class="d-flex flex-column">
 
@@ -152,17 +160,41 @@
                         <div class="container-fluid">
                             <table class="table table-bordered" width="100%" cellspacing="0">
                                 <thead>
-                                    <tr>
-                                    <tr>
-                                        <th>Materia</th>
-                                        <th>Curso</th>
 
-                                    </tr>
+                                    <tr>
+                                        <th> Nombre </th>
+                                        <th>
+                                            <%  
+                                                
+                                                List<Materia> lista = repo.findMateriaByIdMateria(NOMmateria);
+
+                                                for (Materia item : lista) {
+                                            %>
+                                            <%=item.getNombre_materia()%>
+                                            <% }
+                                            %>
+                                        </th>
+                                        <th> A </th>
+                                        <th>
+                                            <%
+                                                List<Curso> lista2 = repo.findCursoByIdCurso(NOMcurso);
+
+                                                for (Curso item2 : lista2) {
+                                            %>
+                                            <%=item2.getNombre_curso()%>
+                                            <% }
+                                            %>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <td><%=NOMmateria%></td>
-                                <td><%=NOMcurso%></td>
+                                    <tr>
+                                        <td> ID </td>
+                                        <td><%=NOMmateria%></td>
+                                        <td> A </td>
+                                        <td><%=NOMcurso%></td>
+
+                                    </tr>
 
                                 </tbody>
                             </table>
