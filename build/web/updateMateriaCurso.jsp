@@ -4,6 +4,7 @@
     Author     : SENA2
 --%>
 
+<%@page import="com.adsi.modelo.MateriaCurso"%>
 <%@page import="com.adsi.modelo.Materia"%>
 <%@page import="java.util.List"%>
 <%@page import="com.adsi.modelo.Curso"%>
@@ -104,6 +105,22 @@
                     </div>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-search"></i>
+                        <span>Consultas</span>
+                    </a>
+                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+
+                            <!--Enlaces de referencia para las consultas-->
+                            <a class="collapse-item" href="consultaAprendizCurso.jsp">Aprendices x Curso</a>
+                            <a class="collapse-item" href="consultaPromedio.jsp">Promedio</a>
+
+                        </div>
+                    </div>
+                </li>
+
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
                 <!-- Sidebar Toggler (Sidebar) -->
@@ -127,7 +144,7 @@
         String IdMateriaCurso;
         int IdMateria;
         int IdCurso;
-
+        
         IdMateriaCurso = request.getParameter("ID");
         IdMateria = Integer.parseInt(request.getParameter("Materia"));
         IdCurso = Integer.parseInt(request.getParameter("Curso"));
@@ -148,73 +165,74 @@
                 </div>
                 <div class="card-body">
 
-                    <form action="">
+                    <form action="datosUpdateMateriasCurso.jsp">
                         <div class="form-row">
 
                             <div class="form-group col-md-4">
                                 <label >ID</label>
-                                <input type="Text" class="form-control" name="Id" value="<%=IdMateriaCurso%>" readonly="readonly">
+                                <input type="Text" class="form-control" name="Id2" value="<%=IdMateriaCurso%>" readonly="readonly">
                             </div>
 
                             <div class="form-group col-md-4">
                                 <label >MATERIA</label>
                                 <select class="form-control" name="fk_materia" required="true">
-                                        <%
-                                            List<Materia> lista = repo.findMateriaByIdMateria(IdMateria);
+                                    <%
+                                        List<Materia> lista = repo.findMateriaByIdMateria(IdMateria);
+                                        
+                                        for (Materia item : lista) {
+                                    %>
+                                    <option value="<%=IdMateria%>">
+                                        <%=item.getNombre_materia()%> (Actual)
+                                    </option>
+                                    <% }
+                                    %>
 
-                                            for (Materia item : lista) {
-                                        %>
-                                        <option value="<%=item.getId_materias() %>">
-                                            <%=item.getNombre_materia() %> (Actual)
-                                        </option>
-                                        <% }
-                                        %>
 
-
-                                        <%
-                                            List<Materia> lista2 = repo.findAllMateria();
-                                            for (Materia item2 : lista2) {
-                                        %>
-                                        <option value="<%=item2.getId_materias() %>">
-                                            <%= item2.getNombre_materia() %> 
-                                        </option>
-                                        <%
-                                            }
-                                        %>
-                                    </select>
+                                    <%    
+                                        List<Materia> lista2 = repo.findAllMateria();
+                                        for (Materia item2 : lista2) {
+                                    %>
+                                    <option value="<%=item2.getId_materias()%>">
+                                        <%= item2.getNombre_materia()%> 
+                                    </option>
+                                    <%
+                                        }
+                                    %>
+                                </select>
                             </div>
 
                             <div class="form-group col-md-4">
                                 <label >CURSO</label>
                                 <select class="form-control" name="fk_curso" required="true">
-                                        <%
-                                            List<Curso> lista3 = repo.findCursoByIdCurso(IdCurso);
+                                    <%    
+                                        List<Curso> lista3 = repo.findCursoByIdCurso(IdCurso);
+                                        
+                                        for (Curso item3 : lista3) {
+                                    %>
+                                    <option value="<%=IdCurso%>">
+                                        <%=item3.getNombre_curso()%> (Actual)
+                                    </option>
+                                    <% }
+                                    %>
 
-                                            for (Curso item3 : lista3) {
-                                        %>
-                                        <option value="<%=item3.getId_cursos()%>">
-                                            <%=item3.getNombre_curso()%> (Actual)
-                                        </option>
-                                        <% }
-                                        %>
 
-
-                                        <%
-                                            List<Curso> lista4 = repo.findAllCursos();
-                                            for (Curso item4 : lista4) {
-                                        %>
-                                        <option value="<%=item4.getId_cursos()%>">
-                                            <%= item4.getNombre_curso()%> 
-                                        </option>
-                                        <%
-                                            }
-                                        %>
-                                    </select>
+                                    <%    
+                                        List<Curso> lista4 = repo.findAllCursos();
+                                        for (Curso item4 : lista4) {
+                                    %>
+                                    <option value="<%=item4.getId_cursos()%>">
+                                        <%= item4.getNombre_curso()%> 
+                                    </option>
+                                    <%
+                                        }
+                                    %>
+                                </select>
                             </div>
 
                         </div>
-                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                        <button type="submit" name="btnActualizar" class="btn btn-primary">Actualizar</button>
                     </form>
+                    
                 </div>
             </div>
 

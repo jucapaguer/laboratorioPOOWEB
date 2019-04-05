@@ -101,6 +101,22 @@
                     </div>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-search"></i>
+                        <span>Consultas</span>
+                    </a>
+                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            
+                            <!--Enlaces de referencia para las consultas-->
+                            <a class="collapse-item" href="consultaAprendizCurso.jsp">Aprendices x Curso</a>
+                            <a class="collapse-item" href="consultaPromedio.jsp">Promedio</a>
+                           
+                        </div>
+                    </div>
+                </li>
+                
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
                 <!-- Sidebar Toggler (Sidebar) -->
@@ -146,7 +162,7 @@
                 </div>
                 <div class="card-body">
 
-                    <form action="">
+                    <form action="datosUpdateMaterias.jsp">
                         <div class="form-row">
                             <!--Cada variable que fue declarada en el anterior segemento es ubicada dentro
                                de los inputs correspondientes para la muestra y luego manipulacion de la
@@ -170,32 +186,6 @@
                         <button type="submit" class="btn btn-primary" name="btnActualizar">Actualizar</button>
                     </form>
 
-                        <!--Dentro de este segmento es donde son almacenados los datos que fueron manipulados 
-                        anteriormente en los inputs, luego son enviados atraves de los SETs a un metodo que ya
-                        fue declarado en la clase controlador.
-                        terminado este proceso la pagina se cerra y pasara a la pagina tablaMaterias
-                        -->
-                    <%
-                        if (request.getParameter("btnActualizar") != null) {
-                            int ID;
-                            String NombreMateria;
-                            int Intensidad;
-
-                            ID = Integer.parseInt(request.getParameter("ID2"));
-                            NombreMateria = request.getParameter("Nombre2");
-                            Intensidad = Integer.parseInt(request.getParameter("Intensidad2"));
-
-                            Materia updateMateria = new Materia();
-
-                            updateMateria.setId_materias(ID);
-                            updateMateria.setNombre_materia(NombreMateria);
-                            updateMateria.setIntensidad(Intensidad);
-
-                            repo.editarMateria(updateMateria);
-                            request.getRequestDispatcher("tablaMaterias.jsp").forward(request, response);
-                        }
-
-                    %>
                 </div>
             </div>
 

@@ -482,7 +482,7 @@ public class Controlador extends Conexion {
             pst.setInt(1, materiaCurso.getFk_curso());
             pst.setInt(2, materiaCurso.getFk_materia());
 
-            pst.executeQuery();                               //Ejecutarla 
+            pst.execute();                               //Ejecutarla 
 
             System.out.println("El Query " + query);
 
@@ -635,69 +635,5 @@ public class Controlador extends Conexion {
         return lista;                            //Retorna la lista llena
     }
 
-    public LinkedList findAprendicesCursoEdad(int p_curso, int edad) throws SQLException {
-        if (!hayConexion()) {
-            throw new SQLException(" No existe conexion abierta ");
-        }
-
-        PreparedStatement pst = null;
-        ResultSet rst = null;
-        LinkedList lista = new LinkedList();
-        try {
-            String query;
-            query = "Select * from aprendices a where a.fk_curso = ? and edad> ? ";    //Definir la consulta
-            pst = con.prepareStatement(query);                      //Prepararla
-            pst.setInt(1, p_curso);
-            pst.setInt(2, edad);
-
-            rst = pst.executeQuery();                               //Ejecutarla 
-
-            while (rst.next()) {
-                lista.add(Aprendiz.load(rst));     //Recorre el RS y llena una lista
-            }
-            System.out.println("El Query " + query);
-
-        } finally {
-            if (pst != null) {
-                pst.close();
-                pst = null;
-            }
-            if (rst != null) {
-                rst.close();
-                rst = null;
-            }
-        }
-        return lista;                            //Retorna la lista llena
-    }
-    
-    //Metodos de Conteos
-    public int contarAprendicesByEdadCurso(Aprendiz aprendiz)throws SQLException {
-        if (!hayConexion()) {
-            throw new SQLException(" No existe conexion abierta ");
-        }
-
-        PreparedStatement pst = null;
-        try {
-            String query;
-            query = "SELECT edad,count(*) `aprendices` where `edad`=? and `fk_curso`=?";    //Definir la consulta
-            pst = con.prepareStatement(query);                      //Prepararla
-            pst.setString(1, aprendiz.getEdad());
-            pst.setInt(2, aprendiz.getFk_curso());
-
-            pst.execute();                               //Ejecutarla 
-
-            System.out.println("El Query " + query);
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }finally {
-            if (pst != null) {
-                pst.close();
-                pst = null;
-            }
-          
-        }
-        return Aprendiz;
-    }
-
+   
 }

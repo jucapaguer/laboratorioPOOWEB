@@ -102,6 +102,23 @@
                     </div>
                 </li>
 
+                
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-search"></i>
+                        <span>Consultas</span>
+                    </a>
+                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            
+                            <!--Enlaces de referencia para las consultas-->
+                            <a class="collapse-item" href="consultaAprendizCurso.jsp">Aprendices x Curso</a>
+                            <a class="collapse-item" href="consultaPromedio.jsp">Promedio</a>
+                           
+                        </div>
+                    </div>
+                </li>
+                
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
 
@@ -119,6 +136,7 @@
         <!--Dentro de este segmento es donde son almacenas los datos que fueron tranferidos de la pagina tabla,-->
         <%
             Controlador repo = (Controlador) session.getAttribute("repo");
+            
             String id;
             String documento;
             String nombres;
@@ -152,7 +170,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">APRENDIZ</h6>
                     </div>
                     <div class="card-body">
-                        <form action="">
+                        <form action="datosUpdateAprendiz.jsp">
                             <div class="form-row">
 
                                 <!--Cada variable que fue declarada en el anterior segemento es ubicada dentro
@@ -160,7 +178,7 @@
                                     informacion-->
                                 <div class="form-group col-md-4">
                                     <label >ID</label>
-                                    <input type="Text" class="form-control" name="Id" value="<%=id%>" readonly="readonly">
+                                    <input type="Text" class="form-control" name="Id2" value="<%=id%>" readonly="readonly">
                                 </div>
 
                                 <div class="form-group col-md-4">
@@ -187,7 +205,7 @@
                                 <div class="form-group col-md-4">
                                     <label >SEXO</label>
                                     <select class="form-control" name="Sexo2" required="true">
-                                        <option ><%=sexo%> (Actual)</option>
+                                        <option value="<%=sexo%>"><%=sexo%> (Actual)</option>
                                         <option value="M">Masculino</option>
                                         <option value="F">Femenino</option>                                        
                                     </select>
@@ -224,44 +242,7 @@
                             <button type="submit" class="btn btn-primary" name="btnActualizar">Actualizar</button>
                         </form>
 
-                        <!--Dentro de este segmento es donde son almacenados los datos que fueron manipulados 
-                        anteriormente en los inputs, luego son enviados atraves de los SETs a un metodo que ya
-                        fue declarado en la clase controlador.
-                        terminado este proceso la pagina se cerra y pasara a la pagina tabla
-                        -->
-                        <%
-                            if (request.getParameter("btnActualizar") != null) {
-                                int Id;
-                                String Documento;
-                                String Nombres;
-                                String Apellidos;
-                                String Edad;
-                                String Sexo;
-                                int Fk_curso;
-
-                                Id = Integer.parseInt(request.getParameter("Id"));
-                                Documento = request.getParameter("Documento2");
-                                Nombres = request.getParameter("Nombres2");
-                                Apellidos = request.getParameter("Apellidos2");
-                                Sexo = request.getParameter("Sexo2");
-                                Edad = request.getParameter("Edad2");
-                                Fk_curso = Integer.parseInt(request.getParameter("fk_curso2"));
-
-                                Aprendiz updateAprendiz = new Aprendiz();
-
-                                updateAprendiz.setId_aprendices(Id);
-                                updateAprendiz.setDocumento(Documento);
-                                updateAprendiz.setNombres(Nombres);
-                                updateAprendiz.setApellidos(Apellidos);
-                                updateAprendiz.setSexo(Sexo);
-                                updateAprendiz.setEdad(Edad);
-                                updateAprendiz.setFk_curso(Fk_curso);
-
-                                repo.editarAprendiz(updateAprendiz);
-                                request.getRequestDispatcher("tabla.jsp").forward(request, response);
-                            }
-
-                        %>
+                        
                     </div>
                 </div>
 
